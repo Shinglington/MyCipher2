@@ -24,3 +24,16 @@ class Cipher():
 			if c in keep:
 				output += c
 		return output
+
+	
+	def restore_punct(self, no_punct_text, punct_text):
+		restored = ""
+		plain_index = 0
+		for c in no_punct_text:
+			if c.upper() not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+				restored += c
+			else:
+				restored += punct_text[plain_index]
+				plain_index += 1
+		return restored
+	
