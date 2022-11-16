@@ -8,6 +8,7 @@ class ColTrans(Cipher):
 		self.dec_index = self.get_inverse_index()
 
 	def encrypt(self, plaintext, keep_punct = False):
+
 		text = self.remove_punct(plaintext)
 		ciphertext = ""
 
@@ -15,10 +16,14 @@ class ColTrans(Cipher):
 		while (len(text) % len(self.key) != 0):
 			text += "X"
 
-		for i in range(0, len(text), len(text) / len(self.key)):
-			
-			
-		
+		row_count = len(text) / len(self.key)
+		for i in range(0, row_count):
+			row = ""
+			for j in range(len(self.key)):
+				row += text[i+(j*row_count)]
+			for k in range(len(self.key)):
+				ciphertext += original[self.enc_index[k]]
+
 		if keep_punct:
 			ciphertext = self.restore_punct(plaintext, ciphertext)
 		return ciphertext
@@ -28,6 +33,13 @@ class ColTrans(Cipher):
 		text = self.remove_punct(ciphertext)
 		plaintext = ""
 
+		row_count = len(text) / len(self.key)
+		for i in range(0, row_count):
+			row = ""
+			for j in range(len(self.key)):
+				row += text[i+(j*row_count)]
+			for k in range(len(self.key)):
+				plaintext += original[self.dec_index[k]]
 
 		if keep_punct:
 			plaintext = self.restore_punct(ciphertext, plaintext)
