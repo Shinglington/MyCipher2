@@ -22,7 +22,7 @@ class ColTrans(Cipher):
 			for j in range(len(self.key)):
 				row += text[i+(j*row_count)]
 			for k in range(len(self.key)):
-				ciphertext += original[self.enc_index[k]]
+				ciphertext += row[self.enc_index[k]]
 
 		if keep_punct:
 			ciphertext = self.restore_punct(plaintext, ciphertext)
@@ -39,7 +39,7 @@ class ColTrans(Cipher):
 			for j in range(len(self.key)):
 				row += text[i+(j*row_count)]
 			for k in range(len(self.key)):
-				plaintext += original[self.dec_index[k]]
+				plaintext += row[self.dec_index[k]]
 
 		if keep_punct:
 			plaintext = self.restore_punct(ciphertext, plaintext)

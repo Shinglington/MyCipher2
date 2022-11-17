@@ -4,12 +4,13 @@ class Affine(Cipher):
 	def __init__(self, a, b):
 		self.a = a
 		self.b = b
-
 		self.inverse_a = -1
 		for inv in range(1, 26, 2):
 			if (self.a * inv) % 26 == 1:
 				self.inverse_a = inv
 				break
+
+		Cipher.__init__(self)
 		assert 0 <= self.inverse_a <= 25, "No inverse for key a = " + str(self.a)
 		
 	

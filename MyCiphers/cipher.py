@@ -20,20 +20,23 @@ class Cipher():
 
 	def remove_punct(self, text, keep = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 		output = ""
+		text = text.upper()
 		for c in text:
 			if c in keep:
 				output += c
 		return output
 
-	
+		
 	def restore_punct(self, no_punct_text, punct_text):
 		restored = ""
-		plain_index = 0
-		for c in no_punct_text:
-			if c.upper() not in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+		ciph_index = 0
+		for p in punct_text:
+			if p.upper() in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+				c = no_punct_text[ciph_index]
 				restored += c
+				ciph_index += 1
 			else:
-				restored += punct_text[plain_index]
-				plain_index += 1
+				restored += p	
 		return restored
+	
 	
