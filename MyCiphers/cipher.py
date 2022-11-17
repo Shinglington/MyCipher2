@@ -36,7 +36,7 @@ class Cipher():
 				restored += c
 				ciph_index += 1
 			else:
-				restored += p	
+				restored += p
 		return restored
 	
 	
