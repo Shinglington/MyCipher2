@@ -1,9 +1,10 @@
 import MyCiphers as Ciph
 
-keyword = "ZEBRA"
+keyword = "GERMAN"
+ciphertext = "defend the east wall of the castle"
 
-text = Ciph.ColTrans(keyword).encrypt("attack at dawn", True)
+text = Ciph.RowTrans(keyword).encrypt(ciphertext)
 print(text)
-print(Ciph.ColTrans(keyword).decrypt(text, True))
+print(Ciph.RowTrans(keyword).decrypt(text))
 
 print("done")
