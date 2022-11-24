@@ -10,3 +10,4 @@ from MyCiphers.polybius import PolybiusSquare
 from MyCiphers.baconian import Baconian
 from MyCiphers.autokey import Autokey
 from MyCiphers.beaufort import Beaufort
+from MyCiphers.playfair import Playfair
