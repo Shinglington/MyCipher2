@@ -1,6 +1,8 @@
 from MyCiphers.cipher import Cipher
 
+
 class Affine(Cipher):
+
 	def __init__(self, a, b):
 		self.a = a
 		self.b = b
@@ -12,10 +14,8 @@ class Affine(Cipher):
 
 		Cipher.__init__(self)
 		assert 0 <= self.inverse_a <= 25, "No inverse for key a = " + str(self.a)
-		
-	
 
-	def encrypt(self, plaintext, keep_punct = False):
+	def encrypt(self, plaintext, keep_punct=False):
 		text = self.remove_punct(plaintext)
 		ciphertext = ""
 		for c in text:
@@ -24,11 +24,12 @@ class Affine(Cipher):
 			ciphertext = self.restore_punct(ciphertext, plaintext)
 		return ciphertext
 
-	def decrypt(self, ciphertext, keep_punct = False):
+	def decrypt(self, ciphertext, keep_punct=False):
 		text = self.remove_punct(ciphertext)
 		plaintext = ""
 		for c in text:
-			plaintext += self.int_to_char(self.inverse_a * (self.char_to_int(c) - self.b))
+			plaintext += self.int_to_char(self.inverse_a *
+			                              (self.char_to_int(c) - self.b))
 		if keep_punct:
 			plaintext = self.restore_punct(plaintext, ciphertext)
 		return plaintext

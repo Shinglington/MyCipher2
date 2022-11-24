@@ -1,9 +1,9 @@
-
 class Cipher():
+
 	def __init__(self):
 		self.alphabet_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		self.alphabet_lower = "abcdefghijklmnopqrstuvwxyz"
-	
+
 	def encrypt(self, string):
 		return string
 
@@ -15,10 +15,10 @@ class Cipher():
 		return self.alphabet_upper.index(char)
 
 	def int_to_char(self, i):
-		i = i%len(self.alphabet_upper)
+		i = i % len(self.alphabet_upper)
 		return self.alphabet_upper[i]
 
-	def remove_punct(self, text, keep = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+	def remove_punct(self, text, keep="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 		output = ""
 		text = text.upper()
 		for c in text:
@@ -26,7 +26,6 @@ class Cipher():
 				output += c
 		return output
 
-		
 	def restore_punct(self, no_punct_text, punct_text):
 		restored = ""
 		ciph_index = 0
@@ -38,5 +37,3 @@ class Cipher():
 			else:
 				restored += p
 		return restored
-	
-	

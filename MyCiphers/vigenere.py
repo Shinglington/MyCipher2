@@ -1,24 +1,20 @@
 from MyCiphers.cipher import Cipher
+from MyCiphers.caesar import Caesar
 
 
-class SimpleSub(Cipher):
+class Vigenere(Cipher):
 
 	def __init__(self, key):
 		Cipher.__init__(self)
-		cipher_alphabet = ""
-		for c in key.upper():
-			if c not in cipher_alphabet:
-				cipher_alphabet += c
-		for c in self.alphabet_upper:
-			if c not in cipher_alphabet:
-				cipher_alphabet += c
-		self.key = cipher_alphabet
+		self.key = key.upper()
 
 	def encrypt(self, plaintext, keep_punct=False):
 		text = self.remove_punct(plaintext)
 		ciphertext = ""
-		for c in text:
-			ciphertext += self.key[self.char_to_int(c)]
+		for i in range(len(text)):
+			keychar = self.key[i % len(self.key)]
+			ciphertext += Caesar(self.char_to_int(keychar)).encrypt(text[i])
+
 		if keep_punct:
 			ciphertext = self.restore_punct(ciphertext, plaintext)
 		return ciphertext
@@ -26,8 +22,10 @@ class SimpleSub(Cipher):
 	def decrypt(self, ciphertext, keep_punct=False):
 		text = self.remove_punct(ciphertext)
 		plaintext = ""
-		for c in text:
-			plaintext += self.int_to_char(self.key.index(c))
+		for i in range(len(text)):
+			keychar = self.key[i % len(self.key)]
+			plaintext += Caesar(self.char_to_int(keychar)).decrypt(text[i])
+
 		if keep_punct:
 			plaintext = self.restore_punct(plaintext, ciphertext)
 		return plaintext

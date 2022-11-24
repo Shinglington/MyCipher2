@@ -1,11 +1,13 @@
 from MyCiphers.cipher import Cipher
 
+
 class Caesar(Cipher):
+
 	def __init__(self, key):
 		self.key = key % 26
 		Cipher.__init__(self)
 
-	def encrypt(self, plaintext, keep_punct = False):
+	def encrypt(self, plaintext, keep_punct=False):
 		text = self.remove_punct(plaintext)
 		ciphertext = ""
 		for c in text:
@@ -13,8 +15,8 @@ class Caesar(Cipher):
 		if keep_punct:
 			ciphertext = self.restore_punct(plaintext, ciphertext)
 		return ciphertext
-		
-	def decrypt(self, ciphertext, keep_punct = False):
+
+	def decrypt(self, ciphertext, keep_punct=False):
 		text = self.remove_punct(ciphertext)
 		plaintext = ""
 		for c in text:
