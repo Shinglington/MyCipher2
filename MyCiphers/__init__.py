@@ -8,3 +8,4 @@ from MyCiphers.railfence import Railfence
 from MyCiphers.morse import Morse
 from MyCiphers.polybius import PolybiusSquare
 from MyCiphers.baconian import Baconian
+from MyCiphers.autokey import Autokey

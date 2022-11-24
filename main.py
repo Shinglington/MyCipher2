@@ -1,13 +1,12 @@
 import MyCiphers as Ciph
 
 plaintext = "defend the east wall of the castle"
-
-cipher = Ciph.Baconian().encrypt(plaintext)
+key = "HELLO"
+cipher = Ciph.Autokey(key).encrypt(plaintext)
 print(cipher)
 
-cipher = "AABBBAABAAABABAABABAABBAB"
 
-print(Ciph.Baconian().decrypt(cipher))
+print(Ciph.Autokey(key).decrypt(cipher))
 
 
 print("done")
