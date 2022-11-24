@@ -6,3 +6,4 @@ from MyCiphers.simplesub import SimpleSub
 from MyCiphers.vigenere import Vigenere
 from MyCiphers.railfence import Railfence
 from MyCiphers.morse import Morse
+from MyCiphers.polybius import PolybiusSquare

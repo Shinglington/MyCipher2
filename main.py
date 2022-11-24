@@ -1,11 +1,12 @@
 import MyCiphers as Ciph
 
-plaintext = "dCode Morse"
+plaintext = "defend the east wall of the castle"
+key = "phqgiumeaylnofdxkrcvstzwb".upper()
 
-cipher = Ciph.Morse().encrypt(plaintext)
+cipher = Ciph.PolybiusSquare(key).encrypt(plaintext)
 print(cipher)
 
-print(Ciph.Morse().decrypt(cipher))
+print(Ciph.PolybiusSquare(key).decrypt(cipher))
 
 
 print("done")

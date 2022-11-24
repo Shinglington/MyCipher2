@@ -18,7 +18,7 @@ class Cipher():
 		i = i % len(self.alphabet_upper)
 		return self.alphabet_upper[i]
 
-	def remove_punct(self, text, keep="ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
+	def remove_punct(self, text, keep = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 		output = ""
 		text = text.upper()
 		for c in text:
@@ -26,11 +26,11 @@ class Cipher():
 				output += c
 		return output
 
-	def restore_punct(self, no_punct_text, punct_text):
+	def restore_punct(self, no_punct_text, punct_text, chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"):
 		restored = ""
 		ciph_index = 0
 		for p in punct_text:
-			if p.upper() in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+			if p.upper() in chars:
 				c = no_punct_text[ciph_index]
 				restored += c
 				ciph_index += 1
