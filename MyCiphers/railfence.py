@@ -9,7 +9,7 @@ class Railfence(Cipher):
 	def encrypt(self, plaintext, keep_punct = False):
 		text = self.remove_punct(plaintext)
 		ciphertext = ""
-		fence = make_fence(text)
+		fence = self.make_fence(text)
 		for row in fence:
 			ciphertext += ''.join(row)
 		
@@ -20,14 +20,13 @@ class Railfence(Cipher):
 	def decrypt(self, ciphertext, keep_punct = True):
 		text = self.remove_punct(ciphertext)
 		plaintext = [""] * len(text)
-		fence = make_fence(range(len(text)))
+		fence = self.make_fence(range(len(text)))
+		c_index = 0
 		for row in fence:
 			for item in row:
-				if type(item) is int:
-					pass
-					
-					
-		
+				if item != "":
+					plaintext[item] = ciphertext[c_index]
+					c_index += 1
 		if keep_punct:
 			plaintext = self.restore_punct(plaintext, ciphertext)
 		return plaintext

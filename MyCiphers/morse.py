@@ -20,6 +20,7 @@ class Morse(Cipher):
 	CODE_TO_CHAR = {value:key for key,value in CHAR_TO_CODE.items()}
 	
 	def __init__(self, dot = '.', dash = '-'):
+		Cipher.__init__(self)
 		self.dot = dot
 		self.dash = dash
 
@@ -27,8 +28,14 @@ class Morse(Cipher):
 
 
 
-	def encrypt(self):
-		pass
+	def encrypt(self, plaintext):
+		text = self.remove_punct(plaintext, self.alphabet_upper + '0123456789')
+		ciphertext = ""
+		for c in text:
+			ciphertext += self.CHAR_TO_CODE[c.upper()]
+			ciphertext += " "
+		
+		return ciphertext.strip(" ")
 
 	def decrypt(self, ciphertext):
 		text = ciphertext.replace(self.dot, '.').replace(self.dash, '-')
