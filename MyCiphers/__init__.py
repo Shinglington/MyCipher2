@@ -11,3 +11,5 @@ from MyCiphers.baconian import Baconian
 from MyCiphers.autokey import Autokey
 from MyCiphers.beaufort import Beaufort
 from MyCiphers.playfair import Playfair
+from MyCiphers.foursquare import FourSquare
+from MyCiphers.hill import Hill

@@ -22,6 +22,7 @@ class Playfair(Cipher):
 		col_b = int(self.keysquare.index(b) % 5)
 
 		new_a = a
+		new_b = b
 
 		if row_a == row_b:
 			new_a = self.keysquare[row_a*5 + (col_a + 1) % 5]
@@ -46,6 +47,7 @@ class Playfair(Cipher):
 		col_b = int(self.keysquare.index(b) % 5)
 
 		new_a = a
+		new_b = b
 
 		if row_a == row_b:
 			new_a = self.keysquare[row_a*5 + (col_a - 1) % 5]
@@ -75,11 +77,10 @@ class Playfair(Cipher):
 
 	def decrypt(self, ciphertext, keep_punct = False):
 		text = self.remove_punct(ciphertext)
+		assert len(text) % 2 == 0, "Length of text must be even"
 		plaintext = ""
 		
 		for i in range(0, len(text), 2):
-			if text[i] == text[i+1]:
-				assert "Can't decrypt double letters"
 			plaintext += self.decrypt_pair(text[i], text[i+1])
 
 		if keep_punct:
