@@ -6,10 +6,11 @@ class ngram_score():
 	TEXTFILE_NAMES = [
 	 "monograms.txt", "bigrams.txt", "trigrams.txt", "quadgrams.txt"
 	]
+	
 
 	def __init__(self, default=True):
 
-		folder = "myciphers/ngram_freqs/"
+		folder = "MyCryptanalysis/ngram_freqs/"
 		if default:
 			folder += "default/"
 		else:

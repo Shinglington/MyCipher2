@@ -1,5 +1,6 @@
-import MyCryptanalysis
 from MyCiphers import Caesar
+from MyCryptanalysis.nbest import nbest
+from MyCryptanalysis.ngram_score import calc_score
 
 def Attack_Caesar(ciphertext):
 	attempts = nbest(3)
@@ -8,7 +9,7 @@ def Attack_Caesar(ciphertext):
 
 	for i in range(3):
 		pair = attempts[i]
-		print(i + ". Key = " + pair[0] + ", score = " + pair[1])
+		print(str(i+1) + ". Key = " + str(pair[0]) + ", score = " + str(pair[1]))
 		print(Caesar(pair[0]).decrypt(ciphertext))
 		print("\n\n\n")
 		
