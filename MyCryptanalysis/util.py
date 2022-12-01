@@ -1,0 +1,3 @@
+
+def CalcIoc(text):
+	pass

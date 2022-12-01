@@ -4,10 +4,12 @@ from MyCiphers.cipher import Cipher
 class RowTrans(Cipher):
 
 	def __init__(self, key):
-		self.key = key.upper()
+		if type(key) is str:
+			self.key = key.upper()
+		else:
+			self.key = key
 
 		self.num_key = self.get_numerated_key()
-		print(self.num_key)
 
 	def encrypt(self, plaintext, keep_punct=False):
 		text = self.remove_punct(plaintext)
