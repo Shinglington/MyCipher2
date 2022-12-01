@@ -4,53 +4,41 @@ from MyCiphers.coltrans import ColTrans
 from MyCryptanalysis.ngram_score import calc_score
 
 def Attack_DoubleColTrans(ciphertext, keylen1, keylen2):
-	## Hill climbing
-	keylen = keylen1 * keylen2
-	best_key = []
-	best_score = -99e9
-	key_streak = 0
-	while (key_streak < 10):
-		current_key = GetRandomKey(keylen)
-		current_score = calc_score(ColTrans(current_key).decrypt(ciphertext))
-		iterations = 0
-		while (iterations < 1000):
-			new_key = AlterKey(current_key)
-			score = calc_score(ColTrans(new_key).decrypt(ciphertext))
-			if score > current_score:
-				current_key = new_key
-				current_score = score
-				iterations = 0
-			iterations += 1
-
-		if current_score > best_score:
-			best_score = current_score
-			best_key = current_key
-			print("Score is currently {0}".format(best_score))
-			print(ColTrans(best_key).decrypt(ciphertext))
-			print("Key = {0}".format(best_key))
-			print("\n\n\n")
-			key_streak = 0
-		else:
-			print("Keystreak is now " + str(key_streak+1))
-			key_streak += 1
-
-	print("\n\n\n")
-	print("Key ={0}, score = {1}".format(best_key, best_score))
-	print(ColTrans(best_key).decrypt(ciphertext))
+	def alg(ciphertext, key1, key2):
+		return ColTrans(key1).decrypt(ColTrans(key2).decrypt(ciphertext))
+	Hill_Climb(ciphertext, keylen1, keylen2, alg)
 
 def Attack_DoubleRowTrans(ciphertext, keylen1, keylen2):
-	## Hill climbing
-	keylen = keylen1 * keylen2
+	def alg(ciphertext, key1, key2):
+		return RowTrans(key1).decrypt(RowTrans(key2).decrypt(ciphertext))
+	Hill_Climb(ciphertext, keylen1, keylen2, alg)
+
+
+def Attack_RowColTrans(ciphertext, rowkeylen, colkeylen):
+	def alg(ciphertext, key1, key2):
+		return RowTrans(key1).decrypt(ColTrans(key2).decrypt(ciphertext))
+	Hill_Climb(ciphertext, rowkeylen, colkeylen, alg)
+
+def Attack_ColRowTrans(ciphertext, colkeylen, rowkeylen):
+	def alg(ciphertext, key1, key2):
+		return ColTrans(key1).decrypt(RowTrans(key2).decrypt(ciphertext))
+	Hill_Climb(ciphertext, colkeylen, rowkeylen,  alg)
+
+def Hill_Climb(ciphertext, keylen1, keylen2, decryptalg):
 	best_key = []
 	best_score = -99e9
 	key_streak = 0
 	while (key_streak < 10):
-		current_key = GetRandomKey(keylen)
-		current_score = calc_score(RowTrans(current_key).decrypt(ciphertext))
+		current_key = [GetRandomKey(keylen1), GetRandomKey(keylen2)]
+		current_score = calc_score(decryptalg(ciphertext, current_key[0], current_key[1]))
 		iterations = 0
 		while (iterations < 1000):
-			new_key = AlterKey(current_key)
-			score = calc_score(RowTrans(new_key).decrypt(ciphertext))
+			new_key = current_key
+			if random.randint(0,1) ==  1:
+				new_key = [AlterKey(current_key[0]), current_key[1]]
+			else:
+				new_key = [current_key[0], AlterKey(current_key[1])]
+			score = calc_score(decryptalg(ciphertext, new_key[0], new_key[1]))
 			if score > current_score:
 				current_key = new_key
 				current_score = score
@@ -61,7 +49,7 @@ def Attack_DoubleRowTrans(ciphertext, keylen1, keylen2):
 			best_score = current_score
 			best_key = current_key
 			print("Score is currently {0}".format(best_score))
-			print(RowTrans(best_key).decrypt(ciphertext))
+			print(decryptalg(ciphertext, best_key[0], best_key[1]))
 			print("Key = {0}".format(best_key))
 			print("\n\n\n")
 			key_streak = 0
@@ -71,9 +59,7 @@ def Attack_DoubleRowTrans(ciphertext, keylen1, keylen2):
 
 	print("\n\n\n")
 	print("Key ={0}, score = {1}".format(best_key, best_score))
-	print(RowTrans(best_key).decrypt(ciphertext))
-
-
+	print(decryptalg(ciphertext, best_key[0], best_key[1]))
 
 
 def GetRandomKey(length):

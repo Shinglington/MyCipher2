@@ -3,6 +3,7 @@ from MyCiphers import SimpleSub
 from MyCryptanalysis.ngram_score import calc_score
 
 
+
 def Attack_SimpleSub(ciphertext):
 	## Hill climbing
 	best_key = ""
