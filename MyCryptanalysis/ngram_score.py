@@ -67,3 +67,6 @@ expected_ngrams = ngram_score()
 
 def calc_score(text):
 	return expected_ngrams.calc_fitness(text)
+
+def get_expected_ngrams(n):
+	return expected_ngrams.get_ngram_dict(n)
