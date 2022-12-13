@@ -16,7 +16,7 @@ def Calc_Chi_Squared(text):
 	expected_total = sum(expected_freqs.values())
 	chi_squared = 0
 	for c in expected_freqs:
-		expected_prob = int(expected_freqs[c] / expected_total)
+		expected_prob = expected_freqs[c] / expected_total
 		expected_count = len(text) * expected_prob
 		
 		actual_count = 0

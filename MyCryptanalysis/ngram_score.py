@@ -29,7 +29,7 @@ class ngram_score():
 		ngram_dict = {}
 		for line in open(filename):
 			key, count = line.split(sep)
-			ngram_dict.update({key: count.strip("\n")})
+			ngram_dict.update({key: int(count.strip("\n"))})
 		return ngram_dict
 
 	def load_log_probs(self, ngram_dict, total):
