@@ -5,6 +5,7 @@ from MyCryptanalysis.nbest import nbest
 import MyCryptanalysis.util as util
 
 def Attack_Vigenere(ciphertext, keyLength = None):
+	print("Attempting to attack Vigenere cipher")
 	if keyLength == None:
 		keyLength = guess_key_length(ciphertext)
 	columns = split_to_columns(ciphertext, keyLength)

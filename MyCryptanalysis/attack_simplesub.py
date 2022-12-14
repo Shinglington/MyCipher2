@@ -5,11 +5,12 @@ from MyCryptanalysis.ngram_score import calc_score
 
 
 def Attack_SimpleSub(ciphertext):
+	print("attempting to crack substitution cipher")
 	## Hill climbing
 	best_key = ""
 	best_score = -99e9
 	key_streak = 0
-	while (key_streak < 3):
+	while (key_streak < 5):
 		current_key = GetRandomKey()
 		current_score = calc_score(SimpleSub(current_key).decrypt(ciphertext))
 		iterations = 0
@@ -35,6 +36,7 @@ def Attack_SimpleSub(ciphertext):
 			key_streak += 1
 
 	print("\n\n\n")
+	print("Final Best Key:")
 	print("Key ={0}, score = {1}".format(best_key, best_score))
 	print(SimpleSub(best_key).decrypt(ciphertext))
 	

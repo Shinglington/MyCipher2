@@ -6,6 +6,7 @@ from MyCryptanalysis.nbest import nbest
 from MyCryptanalysis.ngram_score import calc_score
 
 def Attack_ColTrans(ciphertext, keylen = None):
+	print("Attempting the attack column transposition cipher")
 	def alg(ciphertext, key):
 		return ColTrans(key).decrypt(ciphertext)
 
@@ -13,6 +14,7 @@ def Attack_ColTrans(ciphertext, keylen = None):
 
 
 def Attack_RowTrans(ciphertext, keylen = None):
+	print("Attempting the attack row transposition cipher")
 	def alg(ciphertext, key):
 		return RowTrans(key).decrypt(ciphertext)
 		
